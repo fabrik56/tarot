@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeu de Tarot</title>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <h1>Bienvenue au jeu de tarot</h1>
+  <div id="message"></div>
+  <button onclick="playCard()">Jouer une carte</button>
+
+  <script>
+    const socket = io();
+
+    socket.on('welcome', (message) => {
+      document.getElementById('message').textContent = message;
+    });
+
+    socket.on('updatePlayers', (players) => {
+      console.log('Joueurs connectés :', players);
+    });
+
+    socket.on('startGame', (message) => {
+      alert(message);
+    });
+
+    socket.on('cardPlayed', (data) => {
+      console.log(`Carte jouée par ${data.playerId}: ${data.card}`);
+    });
+
+    function playCard() {
+      const card = prompt("Entrez une carte à jouer (ex: Roi de Cœur)");
+      socket.emit('playCard', card);
+    }
+  </script>
+</body>
+</html>
