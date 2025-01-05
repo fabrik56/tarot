@@ -7,8 +7,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "author": "Ton Nom",
-  "license": "MIT",
+  "author": "Fabrice",
+  "license": "no",
   "dependencies": {
     "express": "^4.18.2",
     "socket.io": "^4.7.2"
